@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+{% for vacancy in vacancies %}
+<div class="card my-5">
+    <div class="card-header">
+        <h2>{{ vacancy.title }}</h2>
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">{{ vacancy.company }}</h5>
+        <p class="card-text">{{ vacancy.description }}</p>
+        <a href="{{ vacancy.url }}" class="btn btn-primary">{{ vacancy.title }}</a>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}
