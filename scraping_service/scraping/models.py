@@ -1,10 +1,9 @@
 from django.db import models
-from autoslug import AutoSlugField
 
 
 class City(models.Model):
-    name = models.CharField(max_length=50, verbose_name='Населенный пункт', unique=True)
-    slug = AutoSlugField(populate_from='name', unique=True)
+    name = models.CharField(max_length=255, verbose_name='Населенный пункт', unique=True)
+    slug = models.SlugField(max_length=255, unique=True, blank=True)
 
     class Meta:
         verbose_name = 'Населенный пункт'
@@ -15,8 +14,8 @@ class City(models.Model):
 
 
 class Professions(models.Model):
-    name = models.CharField(max_length=50, verbose_name='Профессия или должность', unique=True)
-    slug = AutoSlugField(populate_from='name', unique=True)
+    name = models.CharField(max_length=255, verbose_name='Профессия или должность', unique=True)
+    slug = models.SlugField(max_length=255, unique=True, blank=True)
 
     class Meta:
         verbose_name = 'Профессия или должность'
