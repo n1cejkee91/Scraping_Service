@@ -4,14 +4,17 @@
 
 
 {% for vacancy in vacancies %}
-<div class="card my-5">
+
+<div class="card border-info my-3">
     <div class="card-header">
-        <h2>{{ vacancy.title }}</h2>
+        <h2><a href="{{ vacancy.url }}">{{ vacancy.title }}</a></h2>
     </div>
     <div class="card-body">
         <h5 class="card-title">{{ vacancy.company }}</h5>
+        <h5 class="card-title">{{ vacancy.city.name }}</h5>
         <p class="card-text">{{ vacancy.description }}</p>
-        <a href="{{ vacancy.url }}" class="btn btn-primary">{{ vacancy.title }}</a>
+        <p class="card-text">{{ vacancy.timestamp }}</p>
+
     </div>
 </div>
 {% endfor %}
