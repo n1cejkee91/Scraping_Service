@@ -8,13 +8,13 @@ def home_view(request):
 
     form = FindForm(request.GET)
     city = request.GET.get('city')
-    profession = request.GET.get('profession')
-    if city or profession:
+    language = request.GET.get('language')
+    if city or language:
         _filter = {}
         if city:
             _filter['city__slug'] = city
-        if profession:
-            _filter['profession__slug'] = profession
+        if language:
+            _filter['language__slug'] = language
         vacancies = Vacancy.objects.filter(**_filter)
 
     return render(request, 'scraping/home.html', {'vacancies': vacancies, 'form': form})
