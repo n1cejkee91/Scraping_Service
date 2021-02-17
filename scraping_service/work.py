@@ -68,5 +68,5 @@ def rabota(url):
 if __name__ == '__main__':
     url = 'https://rabota.ua/zapros/python/%d1%83%d0%ba%d1%80%d0%b0%d0%b8%d0%bd%d0%b0'
     jobs, errors = rabota(url)
-    with codecs.open('work.json', 'w', 'utf-8') as h:
+    with codecs.open('work.txt', 'w', 'utf-8') as h:
         h.write(str(jobs))
