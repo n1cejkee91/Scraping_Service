@@ -1,3 +1,4 @@
+import jsonfield
 from django.db import models
 
 
@@ -35,8 +36,17 @@ class Vacancy(models.Model):
     timestamp = models.DateField(auto_now_add=True)
 
     class Meta:
-        verbose_name = 'Вакансия'
+        verbose_name = 'Вакансия(ю)'
         verbose_name_plural = 'Вакансии'
 
     def __str__(self):
         return self.title
+
+
+class Errors(models.Model):
+    timestamp = models.DateField(auto_now_add=True)
+    data = jsonfield.JSONField()
+
+    class Meta:
+        verbose_name = 'Ошибка(у)'
+        verbose_name_plural = 'Ошибки'
