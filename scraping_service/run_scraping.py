@@ -1,6 +1,7 @@
 import codecs
 import os, sys
 
+from django.contrib.auth import get_user_model
 from django.db import DatabaseError
 
 proj = os.path.dirname(os.path.abspath('manage.py'))
@@ -12,8 +13,9 @@ import django
 django.setup()
 
 from scraping.parsers import *
-
 from scraping.models import Vacancy, City, Languages, Errors
+
+User = get_user_model()
 
 parsers = (
     (work, 'https://www.work.ua/jobs-kyiv-python/'),
@@ -21,6 +23,15 @@ parsers = (
     (rabota, 'https://rabota.ua/zapros/python/%d1%83%d0%ba%d1%80%d0%b0%d0%b8%d0%bd%d0%b0'),
     (djinni, 'https://djinni.co/jobs/keyword-python/kyiv/'),
 )
+
+
+def get_settings_user():
+    qs = User.objects.filter(send_email=True).values()
+    settings_user_lst = set((q['city_id'], q['language_id']) for q in qs)
+    return settings_user_lst
+
+
+q = get_settings_user()
 
 city = City.objects.filter(slug='kiev').first()
 language = Languages.objects.filter(slug='python').first()

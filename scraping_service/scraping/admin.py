@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import City, Languages, Vacancy, Errors
+from .models import City, Languages, Vacancy, Errors, Url
 
 
 class CityAdmin(admin.ModelAdmin):
@@ -14,3 +14,4 @@ admin.site.register(City, CityAdmin)
 admin.site.register(Languages, LanguagesAdmin)
 admin.site.register(Vacancy)
 admin.site.register(Errors)
+admin.site.register(Url)

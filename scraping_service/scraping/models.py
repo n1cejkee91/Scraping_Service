@@ -50,3 +50,16 @@ class Errors(models.Model):
     class Meta:
         verbose_name = 'Ошибка(у)'
         verbose_name_plural = 'Ошибки'
+
+
+def default_urls():
+    return {'work': '', 'rabota': '', 'dou': '', 'djinni': ''}
+
+
+class Url(models.Model):
+    city = models.ForeignKey('City', on_delete=models.CASCADE, verbose_name='Город')
+    language = models.ForeignKey('Languages', on_delete=models.CASCADE, verbose_name='Язык программирования')
+    url_data = jsonfield.JSONField(default=default_urls)
+    
+    class Meta:
+        unique_together = ('city', 'language')
