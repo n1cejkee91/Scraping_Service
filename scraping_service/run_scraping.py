@@ -1,3 +1,4 @@
+import asyncio
 import codecs
 import os, sys
 
@@ -24,6 +25,8 @@ parsers = (
     (djinni, 'djinni'),
 )
 
+jobs, errors = [], []
+
 
 def get_settings_user():
     qs = User.objects.filter(send_email=True).values()
@@ -41,20 +44,30 @@ def get_urls(settings_for_user):
     return urls
 
 
+async def main(value):
+    func, url, city, language = value
+    job, err = await loop.run_in_executor(None, func, url, city, language)
+    errors.extend(err)
+    jobs.extend(job)
+
 settings_for_user = get_settings_user()
 url_list = get_urls(settings_for_user)
 
-# city = City.objects.filter(slug='kiev').first()
-# language = Languages.objects.filter(slug='python').first()
+loop = asyncio.get_event_loop()
+tmp_tasks = [(func, data['url_data'][key], data['city'], data['language'])
+             for data in url_list
+             for func, key in parsers]
+tasks = asyncio.wait([loop.create_task(main(f)) for f in tmp_tasks])
 
-jobs, errors = [], []
-for data in url_list:
+'''for data in url_list:
     for func, key in parsers:
         url = data['url_data'][key]
         j, e = func(url, city=data['city'], language=data['language'])
         jobs += j
-        errors += e
+        errors += e'''
 
+loop.run_until_complete(tasks)
+loop.close()
 
 for job in jobs:
     v = Vacancy(**job)
@@ -65,5 +78,5 @@ for job in jobs:
 if errors:
     er = Errors(data=errors).save()
 
-#  with codecs.open('work.txt', 'w', 'utf-8') as h:
-#      h.write(str(jobs))
+'''with codecs.open('work.txt', 'w', 'utf-8') as h:
+    h.write(str(jobs))'''
