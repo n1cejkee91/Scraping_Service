@@ -3,10 +3,14 @@
 {% block title %} Home {% endblock %}
 
 {% block content %}
-
+<div class="row">
+    <div class="col-md-6 mx-auto"><h2>Сервис по сбору и рассылке вакансий</h2></div>
+</div>
+<br>
 <div class="row">
     <div class="col-md-6 mx-auto">
-        <form method="GET" action="">
+        <h5>Для просмотра доступных вакансий заполните форму</h5>
+        <form method="GET" action="{% url 'list' %}">
             <div class="form-group">
                 {{ form.as_p }}
             </div>
@@ -14,31 +18,6 @@
         </form>
     </div>
 </div>
-
-
-{% for vacancy in vacancies %}
-
-<div class="card border-info my-3">
-    <div class="card-header">
-        <h2><a href="{{ vacancy.url }}">{{ vacancy.title }}</a></h2>
-    </div>
-    <div class="card-body">
-        <h5 class="card-title">{{ vacancy.company }}</h5>
-        <h5 class="card-title">{{ vacancy.city.name }}</h5>
-        <p class="card-text">{{ vacancy.description }}</p>
-        <p class="card-text">{{ vacancy.timestamp }}</p>
-
-    </div>
-</div>
-
-{% empty %}
-<div class="row">
-    <div class="col-md-6 mx-auto">
-        <h3>По вашему запросу ничего не найдено</h3>
-    </div>
-</div>
-
-{% endfor %}
 
 {% endblock %}
 
