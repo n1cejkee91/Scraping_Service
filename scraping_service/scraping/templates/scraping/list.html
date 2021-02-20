@@ -40,5 +40,37 @@
 
 {% endfor %}
 
+{% if vacancies %}
+<div class="row">
+    <div class="col my-5">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                {% if vacancies.has_previous %}
+                <li class="page-item">
+                    <a class="page-link"
+                       href="?city={{ city }}&language={{ language }}&page={{ vacancies.previous_page_number }}"
+                       aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                {% endif %}
+                {% for page in vacancies.paginator.page_range %}
+                <li class="page-item {% if page == vacancies.number %} active {% endif %}">
+                    <a class="page-link" href="?city={{ city }}&language={{ language }}&page={{ page }}">{{ page }}</a>
+                </li>
+                {% endfor %}
+                {% if vacancies.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?city={{ city }}&language={{ language }}&page={{ vacancies.next_page_number }}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</div>
+{% endif %}
+
 {% endblock %}
 
