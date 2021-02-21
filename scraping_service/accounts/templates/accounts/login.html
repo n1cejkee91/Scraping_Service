@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %} Home {% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <h5>Форма входа</h5>
+        <form method="POST" action="">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.as_table }}
+            </div>
+            <button type="submit" class="btn btn-primary my-3">Войти</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
