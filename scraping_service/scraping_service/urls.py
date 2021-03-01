@@ -22,5 +22,4 @@ urlpatterns = [
     path('accounts/', include(('accounts.urls', 'accounts'))),
     path('', home_view, name='home'),
     path('list/', list_view, name='list'),
-    path('test/', test, name='test'),
 ]
