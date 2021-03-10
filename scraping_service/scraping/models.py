@@ -52,6 +52,9 @@ class Errors(models.Model):
         verbose_name = 'Ошибка(у)'
         verbose_name_plural = 'Ошибки'
 
+    def __str__(self):
+        return str(self.timestamp)
+
 
 def default_urls():
     return {'work': '', 'rabota': '', 'dou': '', 'djinni': ''}
