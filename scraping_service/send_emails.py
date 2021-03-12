@@ -54,6 +54,7 @@ if users_dct:
             msg.attach_alternative(_html, "text/html")
             msg.send()
 
+
 qs = Errors.objects.filter(timestamp=today)
 subject = ''
 text_content = ''
@@ -61,18 +62,32 @@ to = ADMIN_USER
 _html = ''
 if qs.exists():
     error = qs.first()
-    data = error.data
+    data = error.data['errors']
     for i in data:
+        _html += '<hr>'
+        _html += '<h2>Ошибки скрапинга</h2>'
         _html += f'<p><a href="{i["url"]}">Error: {i["title"]}</a></p>'
     subject = f'Ошибки скрапинга {today}'
     text_content = 'Ошибки скрапинга'
+    data = error.data['user_data']
+    if data:
+        _html += '<hr>'
+        _html += '<h2>Пожелания пользователей</h2>'
+        for i in data:
+            _html += f'<p>>Город: {i["city"]}, Язык программирования: {i["language"]}, Email: {i["email"]}</p>'
+        subject = f'Пожелания пользователей  {today}'
+        text_content = 'Пожелания пользователей'
+
 
 qs = Url.objects.all().values('city', 'language')
 urls_dct = {(i['city'], i['language']): True for i in qs}
 urls_errors = ''
 for keys in users_dct.keys():
     if keys not in urls_dct:
-        urls_errors += f'<p> Для города {keys[0]} и ЯП {keys[1]} отсутствуют Url</p>'
+        _html += '<hr>'
+        _html += '<h2>Отсутствующие урлы</h2>'
+        if keys[0] and keys[1]:
+            urls_errors += f'<p> Для города {keys[0]} и ЯП {keys[1]} отсутствуют Url</p>'
 if urls_errors:
     subject += 'Отсутствующие урлы'
     _html += urls_errors

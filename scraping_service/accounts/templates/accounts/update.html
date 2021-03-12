@@ -21,4 +21,19 @@
     </div>
 </div>
 
+
+<div class="row my-5">
+    <div class="col-md-8 mx-auto">
+        <p>Если в списке нет подходящих параметров, Вы можете заполнить форму ниже с вашими пожеланиями! После того как
+            данные будут обработаны, вы получить письмо на указанный Email</p>
+        <form method="POST" action="{% url 'accounts:contact' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ contact_form.as_p }}
+            </div>
+            <button type="submit" class="btn btn-primary my-3">Отправить</button>
+        </form>
+    </div>
+</div>
+
 {% endblock %}
