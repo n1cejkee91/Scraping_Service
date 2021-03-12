@@ -1,6 +1,7 @@
 import asyncio
-import codecs
-import os, sys
+import os
+import sys
+import datetime as dt
 
 from django.contrib.auth import get_user_model
 from django.db import DatabaseError
@@ -14,7 +15,7 @@ import django
 django.setup()
 
 from scraping.parsers import *
-from scraping.models import Vacancy, City, Languages, Errors, Url
+from scraping.models import Vacancy, Errors, Url
 
 User = get_user_model()
 
@@ -39,8 +40,9 @@ def get_urls(settings_for_user):
     url_dct = {(q['city_id'], q['language_id']): q['url_data'] for q in qs}
     urls = []
     for pair in settings_for_user:
-        tmp = {'city': pair[0], 'language': pair[1], 'url_data': url_dct[pair]}
-        urls.append(tmp)
+        if pair in url_dct:
+            tmp = {'city': pair[0], 'language': pair[1], 'url_data': url_dct[pair]}
+            urls.append(tmp)
     return urls
 
 
@@ -69,5 +71,11 @@ for job in jobs:
     except DatabaseError:
         pass
 if errors:
-    er = Errors(data=errors).save()
+    qs = Errors.objects.filter(timestamp=dt.date.today())
+    if qs.exists():
+        err = qs.first()
+        err.data.update({'errors': errors})
+        err.save()
+    else:
+        er = Errors(data=f'error: {errors}').save()
 
