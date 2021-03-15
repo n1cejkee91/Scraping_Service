@@ -41,8 +41,11 @@ def get_urls(settings_for_user):
     urls = []
     for pair in settings_for_user:
         if pair in url_dct:
-            tmp = {'city': pair[0], 'language': pair[1], 'url_data': url_dct[pair]}
-            urls.append(tmp)
+            tmp = {'city': pair[0], 'language': pair[1]}
+            url_data = url_dct.get(pair)
+            if url_data:
+                tmp['url_data'] = url_dct.get(pair)
+                urls.append(tmp)
     return urls
 
 
@@ -51,6 +54,7 @@ async def main(value):
     job, err = await loop.run_in_executor(None, func, url, city, language)
     errors.extend(err)
     jobs.extend(job)
+
 
 settings_for_user = get_settings_user()
 url_list = get_urls(settings_for_user)
@@ -78,7 +82,6 @@ if errors:
         err.save()
     else:
         er = Errors(data=f'error: {errors}').save()
-
 
 ten_days_ago = dt.date.today() - dt.timedelta(10)
 Vacancy.objects.filter(timestamp__lte=ten_days_ago).delete()

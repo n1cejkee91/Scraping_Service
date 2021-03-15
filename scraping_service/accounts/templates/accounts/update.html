@@ -26,13 +26,23 @@
     <div class="col-md-8 mx-auto">
         <p>Если в списке нет подходящих параметров, Вы можете заполнить форму ниже с вашими пожеланиями! После того как
             данные будут обработаны, вы получить письмо на указанный Email</p>
-        <form method="POST" action="{% url 'accounts:contact' %}">
-            {% csrf_token %}
-            <div class="form-group">
-                {{ contact_form.as_p }}
+        <p>
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse"
+                    aria-expanded="false" aria-controls="collapseExample">
+                Показать форму
+            </button>
+        </p>
+        <div class="collapse" id="collapse">
+            <div class="card card-body">
+                <form method="POST" action="{% url 'accounts:contact' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        {{ contact_form.as_p }}
+                    </div>
+                    <button type="submit" class="btn btn-primary my-3">Отправить</button>
+                </form>
             </div>
-            <button type="submit" class="btn btn-primary my-3">Отправить</button>
-        </form>
+        </div>
     </div>
 </div>
 
