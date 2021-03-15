@@ -5,7 +5,7 @@ import codecs
 from bs4 import BeautifulSoup as BS
 from random import randint
 
-__all__ = ('work', 'rabota', 'dou', 'djinni')
+__all__ = ('work', 'rabota', 'dou', 'djinni', 'rabotaru')
 
 headers = [
     {
@@ -72,7 +72,8 @@ def rabota(url, city=None, language=None):
                                 if company_p:
                                     company = company_p.a.text
                                 jobs.append(
-                                    {'title': title.text, 'url': domain + href, 'description': content, 'company': company,
+                                    {'title': title.text, 'url': domain + href, 'description': content,
+                                     'company': company,
                                      'city_id': city, 'language_id': language})
                 else:
                     errors.append({'url': url, 'title': "Table doesn't exist"})
@@ -135,6 +136,36 @@ def djinni(url, city=None, language=None):
                     jobs.append({'title': title.text, 'url': domain + href, 'description': content, 'company': company,
                                  'city_id': city, 'language_id': language})
             else:
+                errors.append({'url': url, 'title': "Ul doesn't exist"})
+        else:
+            errors.append({'url': url, 'title': 'Page not found'})
+    return jobs, errors
+
+
+def rabotaru(url, city=None, language=None):
+    jobs = []
+    errors = []
+    domain = 'https://www.rabota.ru'
+    if url:
+        resp = requests.get(url, headers=headers[randint(0, 3)])
+        if resp.status_code == 200:
+            soup = BS(resp.content, 'html.parser')
+            main_div = soup.find('div', attrs={'class': 'infinity-scroll r-serp__infinity-list'})
+            if main_div:
+                main_article_lst = main_div.find_all('article', attrs={
+                    'class': 'vacancy-preview-card white-box vacancy-preview-card_snippet r-serp__item r-serp__item_vacancy'})
+                for article in main_article_lst:
+                    title = article.find('h3', attrs={'class': 'vacancy-preview-card__title'})
+                    href = title.a['href']
+                    div_content = article.find('div', attrs={'class': 'vacancy-preview-card__short-description'})
+                    content = div_content.text
+                    company = 'No name'
+                    span_company = article.find('span', attrs={'class': 'vacancy-preview-card__company-name'})
+                    if span_company:
+                        company = span_company.text
+                    jobs.append({'title': title.text, 'url': domain + href, 'description': content, 'company': company,
+                                 'city_id': city, 'language_id': language})
+            else:
                 errors.append({'url': url, 'title': "Div doesn't exist"})
         else:
             errors.append({'url': url, 'title': 'Page not found'})
@@ -142,7 +173,7 @@ def djinni(url, city=None, language=None):
 
 
 if __name__ == '__main__':
-    url = 'https://djinni.co/jobs/keyword-python/kyiv/'
-    jobs, errors = djinni(url)
+    url = 'https://www.rabota.ru/vacancy/?query=%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%81%D1%82%20python&sort=relevance'
+    jobs, errors = rabotaru(url)
     with codecs.open('work.txt', 'w', 'utf-8') as h:
         h.write(str(jobs))

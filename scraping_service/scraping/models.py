@@ -57,7 +57,7 @@ class Errors(models.Model):
 
 
 def default_urls():
-    return {'work': '', 'rabota': '', 'dou': '', 'djinni': ''}
+    return {'work': '', 'rabota': '', 'dou': '', 'djinni': '', 'rabotaru': ''}
 
 
 class Url(models.Model):
