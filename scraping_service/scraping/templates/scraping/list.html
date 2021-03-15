@@ -10,7 +10,7 @@
             <div class="form-group">
                 {{ form.as_p }}
             </div>
-            <button type="submit" class="btn btn-primary">Поиск</button>
+            <button type="submit" class="btn btn-primary"> Новый поиск</button>
         </form>
     </div>
 </div>
@@ -48,20 +48,34 @@
                 {% if vacancies.has_previous %}
                 <li class="page-item">
                     <a class="page-link"
-                       href="?city={{ city }}&language={{ language }}&page={{ vacancies.previous_page_number }}"
+                       href="?city={{ city }}&language={{ language }}&page=1"
                        aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
+                        <span aria-hidden="true">&laquo; </span>
+                    </a>
+                </li>
+                <li class="page-item">
+                <a class="page-link" href="?city={{ city }}&language={{ language }}&page={{ vacancies.previous_page_number }}">
+                        {{ vacancies.previous_page_number  }}
                     </a>
                 </li>
                 {% endif %}
-                {% for page in vacancies.paginator.page_range %}
-                <li class="page-item {% if page == vacancies.number %} active {% endif %}">
-                    <a class="page-link" href="?city={{ city }}&language={{ language }}&page={{ page }}">{{ page }}</a>
+
+                <li class="page-item">
+                    <a class="page-link" href="?city={{ city }}&language={{ language }}&page={{ vacancies.number }}">
+                    {{ vacancies.number }}
+                    </a>
                 </li>
-                {% endfor %}
+
                 {% if vacancies.has_next %}
                 <li class="page-item">
-                    <a class="page-link" href="?city={{ city }}&language={{ language }}&page={{ vacancies.next_page_number }}" aria-label="Next">
+                <a class="page-link" href="?city={{ city }}&language={{ language }}&page={{ vacancies.next_page_number }}">
+                        {{ vacancies.next_page_number  }}
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link"
+                       href="?city={{ city }}&language={{ language }}&page={{ vacancies.paginator.num_pages }}"
+                       aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
