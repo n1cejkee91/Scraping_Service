@@ -4,20 +4,8 @@
 
 {% block content %}
 
-<div class="row">
-    <div class="col-md-6 mx-auto">
-        <form method="GET" action="{% url 'list' %}">
-            <div class="form-group">
-                {{ form.as_p }}
-            </div>
-            <button type="submit" class="btn btn-primary"> Новый поиск</button>
-        </form>
-    </div>
-</div>
-
-
+<h3 class="my-4 text-center">Результаты поиска по Вашему запросу</h3>
 {% for vacancy in vacancies %}
-
 <div class="card border-info my-3">
     <div class="card-header">
         <h2><a href="{{ vacancy.url }}">{{ vacancy.title }}</a></h2>
@@ -42,7 +30,7 @@
 
 {% if vacancies %}
 <div class="row">
-    <div class="col my-5">
+    <div class="col my-3">
         <nav aria-label="Page navigation example">
             <ul class="pagination">
                 {% if vacancies.has_previous %}
@@ -85,6 +73,17 @@
     </div>
 </div>
 {% endif %}
+
+<div class="row">
+    <div class="col-md-6 mx-auto mt-0 my-5">
+        <form method="GET" action="{% url 'list' %}">
+            <div class="form-group">
+                {{ form.as_p }}
+            </div>
+            <button type="submit" class="btn btn-primary"> Новый поиск</button>
+        </form>
+    </div>
+</div>
 
 {% endblock %}
 
