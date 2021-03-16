@@ -44,9 +44,9 @@ class UserRegistrationForm(forms.ModelForm):
 
 
 class UserUpdateForm(forms.Form):
-    city = forms.ModelChoiceField(queryset=City.objects.all(), to_field_name='slug', required=True,
+    city = forms.ModelChoiceField(queryset=City.objects.all(), to_field_name='slug', required=False,
                                   widget=forms.Select(attrs={'class': 'form-control'}), label='Город')
-    language = forms.ModelChoiceField(queryset=Languages.objects.all(), to_field_name='slug', required=True,
+    language = forms.ModelChoiceField(queryset=Languages.objects.all(), to_field_name='slug', required=False,
                                       widget=forms.Select(attrs={'class': 'form-control'}),
                                       label='Язык программирования')
     send_email = forms.BooleanField(required=False, widget=forms.CheckboxInput, label='Получать рассылку?')
