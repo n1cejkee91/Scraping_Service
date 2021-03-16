@@ -57,7 +57,7 @@ class Errors(models.Model):
 
 
 def default_urls():
-    return {'work': '', 'rabota': '', 'dou': '', 'djinni': '', 'rabotaru': ''}
+    return {'work': '', 'rabota': '', 'dou': '', 'djinni': '', 'msk_rabotaru': '', 'spb_rabotaru': ''}
 
 
 class Url(models.Model):
@@ -67,3 +67,6 @@ class Url(models.Model):
 
     class Meta:
         unique_together = ('city', 'language')
+
+    '''def __str__(self):
+        return str((self.city, self.language))'''

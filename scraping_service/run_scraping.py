@@ -24,23 +24,24 @@ parsers = (
     (dou, 'dou'),
     (rabota, 'rabota'),
     (djinni, 'djinni'),
-    (rabotaru, 'rabotaru'),
+    (msk_rabotaru, 'msk_rabotaru'),
+    (spb_rabotaru, 'spb_rabotaru')
 )
 
 jobs, errors = [], []
 
 
-def get_settings_user():
-    qs = User.objects.filter(send_email=True).values()
-    settings_user_lst = set((q['city_id'], q['language_id']) for q in qs)
-    return settings_user_lst
+def get_settings_url():
+    qs = Url.objects.all().values()
+    settings_url_lst = set((q['city_id'], q['language_id']) for q in qs)
+    return settings_url_lst
 
 
-def get_urls(settings_for_user):
+def get_urls(settings_for_url):
     qs = Url.objects.all().values()
     url_dct = {(q['city_id'], q['language_id']): q['url_data'] for q in qs}
     urls = []
-    for pair in settings_for_user:
+    for pair in settings_for_url:
         if pair in url_dct:
             tmp = {'city': pair[0], 'language': pair[1]}
             url_data = url_dct.get(pair)
@@ -57,8 +58,8 @@ async def main(value):
     jobs.extend(job)
 
 
-settings_for_user = get_settings_user()
-url_list = get_urls(settings_for_user)
+settings_for_url = get_settings_url()
+url_list = get_urls(settings_for_url)
 
 loop = asyncio.get_event_loop()
 tmp_tasks = [(func, data['url_data'][key], data['city'], data['language'])
