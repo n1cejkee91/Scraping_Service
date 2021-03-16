@@ -27,7 +27,3 @@ def list_view(request):
         page_obj = paginator.get_page(page_number)
         context['vacancies'] = page_obj
     return render(request, 'scraping/list.html', context)
-
-
-def test(request):
-    return render(request, 'scraping/test.html')

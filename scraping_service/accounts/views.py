@@ -83,8 +83,8 @@ def contact_view(request):
                 err.data['user_data'] = data
                 err.save()
             else:
-                data = [{'city': city, 'language': language, 'email': email}]
-                Errors(data=f"user_data: {data}").save()
+                data = {'user_data': [{'city': city, 'language': language, 'email': email}]}
+                Errors(data=data).save()
             messages.success(request, 'Данные отправлнены')
             return redirect('accounts:update')
         else:
