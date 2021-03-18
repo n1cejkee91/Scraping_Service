@@ -39,7 +39,7 @@ SECRET_KEY = SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["vacansy-scraping-service.herokuapp.com"]
+ALLOWED_HOSTS = ["vacancy-scraping.herokuapp.com/"]
 
 # Application definition
 
