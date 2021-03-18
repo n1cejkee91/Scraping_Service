@@ -68,5 +68,5 @@ class Url(models.Model):
     class Meta:
         unique_together = ('city', 'language')
 
-    '''def __str__(self):
-        return str((self.city, self.language))'''
+    def __str__(self):
+        return str((self.city, self.language))
