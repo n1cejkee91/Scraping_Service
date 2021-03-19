@@ -204,6 +204,6 @@ def spb_rabotaru(url, city=None, language=None):
 
 if __name__ == '__main__':
     url = 'https://www.rabota.ru/vacancy/?query=%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%81%D1%82%20python&sort=relevance'
-    jobs, errors = rabotaru(url)
+    jobs, errors = msk_rabotaru(url)
     with codecs.open('work.txt', 'w', 'utf-8') as h:
         h.write(str(jobs))
