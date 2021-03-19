@@ -24,7 +24,7 @@ DB_NAME = os.environ.get('DB_NAME')
 DB_PASSWORD = os.environ.get('DB_PASSWORD')
 DB_HOST = os.environ.get('DB_HOST')
 DB_USER = os.environ.get('DB_USER')
-SECRET_KEY = os.environ.get('SECRET_KEY')
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -34,7 +34,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = 'coe!5fl*x23_2b4sym%67jr8i5+o0=&_)ti&z45**$-$+_s7(-'
-SECRET_KEY = SECRET_KEY
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'coe!5fl*x23_2b4sym%67jr8i5+o0=&_)ti&z45**$-$+_s7(-')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
