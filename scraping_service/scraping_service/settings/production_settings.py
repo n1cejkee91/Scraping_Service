@@ -39,7 +39,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'coe!5fl*x23_2b4sym%67jr8i5+o0=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["vacancy-scraping.herokuapp.com/"]
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
