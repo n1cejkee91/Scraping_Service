@@ -28,7 +28,7 @@ def work(url, city=None, language=None):
     errors = []
     domain = 'https://www.work.ua'
     if url:
-        resp = requests.get(url, headers=headers[randint(0, 3)])
+        resp = requests.get(url, headers=headers[randint(0, 5)])
         if resp.status_code == 200:
             soup = BS(resp.content, 'html.parser')
             main_div = soup.find('div', id='pjax-job-list')
@@ -56,7 +56,7 @@ def rabota(url, city=None, language=None):
     errors = []
     domain = 'https://rabota.ua/'
     if url:
-        resp = requests.get(url, headers=headers[randint(0, 3)])
+        resp = requests.get(url, headers=headers[randint(0, 5)])
         if resp.status_code == 200:
             soup = BS(resp.content, 'html.parser')
             not_new_jobs = soup.find('div', attrs={'class': 'f-vacancylist-newnotfound'})  # Новых вакансий не найдено
@@ -93,7 +93,7 @@ def dou(url, city=None, language=None):
     jobs = []
     errors = []
     if url:
-        resp = requests.get(url, headers=headers[randint(0, 3)])
+        resp = requests.get(url, headers=headers[randint(0, 5)])
         if resp.status_code == 200:
             soup = BS(resp.content, 'html.parser')
             main_div = soup.find('div', id='vacancyListId')
@@ -123,7 +123,7 @@ def djinni(url, city=None, language=None):
     errors = []
     domain = 'https://djinni.co'
     if url:
-        resp = requests.get(url, headers=headers[randint(0, 3)])
+        resp = requests.get(url, headers=headers[randint(0, 5)])
         if resp.status_code == 200:
             soup = BS(resp.content, 'html.parser')
             main_ul = soup.find('ul', attrs={'class': 'list-unstyled list-jobs'})
@@ -152,7 +152,7 @@ def msk_rabotaru(url, city=None, language=None):
     errors = []
     domain = 'https://www.rabota.ru'
     if url:
-        resp = requests.get(url, headers=headers[randint(0, 3)])
+        resp = requests.get(url, headers=headers[randint(0, 5)])
         if resp.status_code == 200:
             soup = BS(resp.content, 'html.parser')
             main_div = soup.find('div', attrs={'class': 'infinity-scroll r-serp__infinity-list'})
@@ -182,7 +182,7 @@ def spb_rabotaru(url, city=None, language=None):
     errors = []
     domain = 'https://spb.rabota.ru/'
     if url:
-        resp = requests.get(url, headers=headers[randint(0, 3)])
+        resp = requests.get(url, headers=headers[randint(0, 5)])
         if resp.status_code == 200:
             soup = BS(resp.content, 'html.parser')
             main_div = soup.find('div', attrs={'class': 'infinity-scroll r-serp__infinity-list'})
