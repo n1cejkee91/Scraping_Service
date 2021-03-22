@@ -1,4 +1,3 @@
-import jsonfield
 from django.db import models
 
 
@@ -46,7 +45,7 @@ class Vacancy(models.Model):
 
 class Errors(models.Model):
     timestamp = models.DateField(auto_now_add=True)
-    data = jsonfield.JSONField()
+    data = models.JSONField()
 
     class Meta:
         verbose_name = 'Ошибка(у)'
@@ -63,7 +62,7 @@ def default_urls():
 class Url(models.Model):
     city = models.ForeignKey('City', on_delete=models.CASCADE, verbose_name='Город')
     language = models.ForeignKey('Languages', on_delete=models.CASCADE, verbose_name='Язык программирования')
-    url_data = jsonfield.JSONField(default=default_urls)
+    url_data = models.JSONField(default=default_urls)
 
     class Meta:
         unique_together = ('city', 'language')
