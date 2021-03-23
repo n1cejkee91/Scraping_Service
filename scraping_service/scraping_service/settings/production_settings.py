@@ -34,7 +34,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'coe!5fl*x23_2b4sym%67jr8i5+o0=&_)ti&z45**$-$+_s7(-'
+#SECRET_KEY = 'coe!5fl*x23_2b4sym%67jr8i5+o0=&_)ti&z45**$-$+_s7(-'
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'coe!5fl*x23_2b4sym%67jr8i5+o0=&_)ti&z45**$-$+_s7(-')
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -92,16 +92,17 @@ WSGI_APPLICATION = 'scraping_service.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': DB_NAME,
-        'USER': DB_USER,
-        'PASSWORD': DB_PASSWORD,
-        'HOST': DB_HOST,
+        'NAME': 'd6unu52j2i6v7d',
+        'USER': 'mclehlalkwcxoc',
+        'PASSWORD': '74d2be64cc68b35a7ad87fb5500ebd331ceeb02fd3c56ca97a2b2fa065fa8da0',
+        'HOST': 'ec2-52-50-171-4.eu-west-1.compute.amazonaws.com',
         'PORT': '5432'
     }
 }
 
 db = dj_database_url.config()
 DATABASES['default'].update(db)
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -140,10 +141,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-AUTH_USER_MODEL = 'accounts.MyUser'
-
-
-
+#AUTH_USER_MODEL = 'accounts.MyUser'
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
