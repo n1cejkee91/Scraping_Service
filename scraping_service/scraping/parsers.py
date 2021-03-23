@@ -1,7 +1,6 @@
-'''Парсер для сайта work.ua'''
+'''Парсер для сайтов'''
 
 import requests
-import codecs
 from bs4 import BeautifulSoup as BS
 from random import randint
 
@@ -205,10 +204,3 @@ def spb_rabotaru(url, city=None, language=None):
         else:
             errors.append({'url': url, 'title': 'Page not found'})
     return jobs, errors
-
-
-if __name__ == '__main__':
-    url = 'https://www.rabota.ru/vacancy/?query=%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%81%D1%82%20python&sort=relevance'
-    jobs, errors = msk_rabotaru(url)
-    with codecs.open('work.txt', 'w', 'utf-8') as h:
-        h.write(str(jobs))
