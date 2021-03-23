@@ -1,4 +1,5 @@
 from django.db import models
+# import jsonfield
 
 
 class City(models.Model):
