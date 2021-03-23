@@ -34,7 +34,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'coe!5fl*x23_2b4sym%67jr8i5+o0=&_)ti&z45**$-$+_s7(-'
+#SECRET_KEY = 'coe!5fl*x23_2b4sym%67jr8i5+o0=&_)ti&z45**$-$+_s7(-'
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'coe!5fl*x23_2b4sym%67jr8i5+o0=&_)ti&z45**$-$+_s7(-')
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -91,7 +91,7 @@ WSGI_APPLICATION = 'scraping_service.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': DB_NAME,
         'USER': DB_USER,
         'PASSWORD': DB_PASSWORD,
@@ -102,6 +102,7 @@ DATABASES = {
 
 db = dj_database_url.config()
 DATABASES['default'].update(db)
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -141,9 +142,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'accounts.MyUser'
-
-
-
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
