@@ -1,4 +1,5 @@
 '''Парсер для сайтов'''
+from datetime import time
 
 import requests
 from bs4 import BeautifulSoup as BS
@@ -149,6 +150,7 @@ def djinni(url, city=None, language=None):
 def msk_rabotaru(url, city=None, language=None):
     jobs = []
     errors = []
+    time.sleep(0.01)
     domain = 'https://www.rabota.ru'
     if url:
         resp = requests.get(url, headers=headers[randint(0, 5)])
@@ -179,6 +181,7 @@ def msk_rabotaru(url, city=None, language=None):
 def spb_rabotaru(url, city=None, language=None):
     jobs = []
     errors = []
+    time.sleep(0.01)
     domain = 'https://spb.rabota.ru/'
     if url:
         resp = requests.get(url, headers=headers[randint(0, 5)])
