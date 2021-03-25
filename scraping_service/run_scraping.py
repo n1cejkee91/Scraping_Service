@@ -24,7 +24,7 @@ parsers = (
     (dou, 'dou'),
     (rabota, 'rabota'),
     (djinni, 'djinni'),
-    #(msk_rabotaru, 'msk_rabotaru'),
+    (msk_rabotaru, 'msk_rabotaru'),
     #(spb_rabotaru, 'spb_rabotaru'),
 )
 
