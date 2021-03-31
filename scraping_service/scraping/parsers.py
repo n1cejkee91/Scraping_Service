@@ -1,15 +1,10 @@
 """Парсер для сайтов"""
 
-import os
 import requests
 from random import randint
 
 from bs4 import BeautifulSoup as BS
 
-proxyDict = {
-    "http": os.environ.get('FIXIE_URL', ''),
-    "https": os.environ.get('FIXIE_URL', '')
-}
 
 __all__ = ('work', 'rabota', 'dou', 'djinni', 'msk_rabotaru', 'spb_rabotaru')
 
@@ -159,7 +154,7 @@ def msk_rabotaru(url, city=None, language=None):
     domain = 'https://www.rabota.ru'
     if url:
         session = requests.Session()
-        resp = session.get(url, headers=headers[0], proxies=proxyDict)
+        resp = session.get(url, headers=headers[randint(0, 5)])
         if resp.status_code == 200:
             soup = BS(resp.content, 'html.parser')
             main_div = soup.find('div', attrs={'class': 'infinity-scroll r-serp__infinity-list'})
@@ -190,7 +185,7 @@ def spb_rabotaru(url, city=None, language=None):
     domain = 'https://spb.rabota.ru/'
     if url:
         session = requests.Session()
-        resp = session.get(url, headers=headers[0], proxies=proxyDict)
+        resp = session.get(url, headers=headers[randint(0, 5)])
         if resp.status_code == 200:
             soup = BS(resp.content, 'html.parser')
             main_div = soup.find('div', attrs={'class': 'infinity-scroll r-serp__infinity-list'})
