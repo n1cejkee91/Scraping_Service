@@ -158,7 +158,8 @@ def msk_rabotaru(url, city=None, language=None):
     errors = []
     domain = 'https://www.rabota.ru'
     if url:
-        resp = requests.get(url, headers=headers[0], proxies=proxyDict)
+        session = requests.Session()
+        resp = session.get(url, headers=headers[0], proxies=proxyDict)
         if resp.status_code == 200:
             soup = BS(resp.content, 'html.parser')
             main_div = soup.find('div', attrs={'class': 'infinity-scroll r-serp__infinity-list'})
@@ -188,7 +189,8 @@ def spb_rabotaru(url, city=None, language=None):
     errors = []
     domain = 'https://spb.rabota.ru/'
     if url:
-        resp = requests.get(url, headers=headers[0], proxies=proxyDict)
+        session = requests.Session()
+        resp = session.get(url, headers=headers[0], proxies=proxyDict)
         if resp.status_code == 200:
             soup = BS(resp.content, 'html.parser')
             main_div = soup.find('div', attrs={'class': 'infinity-scroll r-serp__infinity-list'})
