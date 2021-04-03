@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup as BS
 
 
 __all__ = ('work', 'rabota', 'dou', 'djinni', 'msk_rabotaru', 'spb_rabotaru')
-'''
+
 headers = [
     {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36'},
@@ -22,14 +22,14 @@ headers = [
     {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.19582'}
 ]
-'''
+
 
 def work(url, city=None, language=None):
     jobs = []
     errors = []
     domain = 'https://www.work.ua'
     if url:
-        resp = requests.get(url)
+        resp = requests.get(url, headers=headers[randint(0, 5)])
         if resp.status_code == 200:
             soup = BS(resp.content, 'html.parser')
             main_div = soup.find('div', id='pjax-job-list')
@@ -57,7 +57,7 @@ def rabota(url, city=None, language=None):
     errors = []
     domain = 'https://rabota.ua/'
     if url:
-        resp = requests.get(url)
+        resp = requests.get(url, headers=headers[randint(0, 5)])
         if resp.status_code == 200:
             soup = BS(resp.content, 'html.parser')
             not_new_jobs = soup.find('div', attrs={'class': 'f-vacancylist-newnotfound'})  # Новых вакансий не найдено
@@ -94,7 +94,7 @@ def dou(url, city=None, language=None):
     jobs = []
     errors = []
     if url:
-        resp = requests.get(url)
+        resp = requests.get(url, headers=headers[randint(0, 5)])
         if resp.status_code == 200:
             soup = BS(resp.content, 'html.parser')
             main_div = soup.find('div', id='vacancyListId')
@@ -124,7 +124,7 @@ def djinni(url, city=None, language=None):
     errors = []
     domain = 'https://djinni.co'
     if url:
-        resp = requests.get(url)
+        resp = requests.get(url, headers=headers[randint(0, 5)])
         if resp.status_code == 200:
             soup = BS(resp.content, 'html.parser')
             main_ul = soup.find('ul', attrs={'class': 'list-unstyled list-jobs'})
@@ -154,7 +154,9 @@ def msk_rabotaru(url, city=None, language=None):
     domain = 'https://www.rabota.ru'
     if url:
         session = requests.Session()
-        resp = session.get(url)
+        adapter = requests.adapters.HTTPAdapter(max_retries=10)
+        session.mount('http://', adapter)
+        resp = session.get(url, headers=headers[randint(0, 5)])
         if resp.status_code == 200:
             soup = BS(resp.content, 'html.parser')
             main_div = soup.find('div', attrs={'class': 'infinity-scroll r-serp__infinity-list'})
@@ -185,7 +187,9 @@ def spb_rabotaru(url, city=None, language=None):
     domain = 'https://spb.rabota.ru/'
     if url:
         session = requests.Session()
-        resp = session.get(url)
+        adapter = requests.adapters.HTTPAdapter(max_retries=10)
+        session.mount('http://', adapter)
+        resp = session.get(url, headers=headers[randint(0, 5)])
         if resp.status_code == 200:
             soup = BS(resp.content, 'html.parser')
             main_div = soup.find('div', attrs={'class': 'infinity-scroll r-serp__infinity-list'})
