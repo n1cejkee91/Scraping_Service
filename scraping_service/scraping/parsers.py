@@ -154,7 +154,7 @@ def msk_rabotaru(url, city=None, language=None):
     domain = 'https://www.rabota.ru'
     if url:
         session = requests.Session()
-        resp = session.get(url, headers=headers[randint(0, 5)])
+        resp = session.get(url, verify=False, headers=headers[randint(0, 5)])
         if resp.status_code == 200:
             soup = BS(resp.content, 'html.parser')
             main_div = soup.find('div', attrs={'class': 'infinity-scroll r-serp__infinity-list'})
@@ -185,7 +185,7 @@ def spb_rabotaru(url, city=None, language=None):
     domain = 'https://spb.rabota.ru/'
     if url:
         session = requests.Session()
-        resp = session.get(url, headers=headers[randint(0, 5)])
+        resp = session.get(url, verify=False, headers=headers[randint(0, 5)])
         if resp.status_code == 200:
             soup = BS(resp.content, 'html.parser')
             main_div = soup.find('div', attrs={'class': 'infinity-scroll r-serp__infinity-list'})
