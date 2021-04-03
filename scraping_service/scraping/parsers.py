@@ -2,6 +2,8 @@
 
 import requests
 from random import randint
+import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 from bs4 import BeautifulSoup as BS
 
