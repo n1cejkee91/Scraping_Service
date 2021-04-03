@@ -154,8 +154,6 @@ def msk_rabotaru(url, city=None, language=None):
     domain = 'https://www.rabota.ru'
     if url:
         session = requests.Session()
-        adapter = requests.adapters.HTTPAdapter(max_retries=10)
-        session.mount('http://', adapter)
         resp = session.get(url, headers=headers[randint(0, 5)])
         if resp.status_code == 200:
             soup = BS(resp.content, 'html.parser')
@@ -187,8 +185,6 @@ def spb_rabotaru(url, city=None, language=None):
     domain = 'https://spb.rabota.ru/'
     if url:
         session = requests.Session()
-        adapter = requests.adapters.HTTPAdapter(max_retries=10)
-        session.mount('http://', adapter)
         resp = session.get(url, headers=headers[randint(0, 5)])
         if resp.status_code == 200:
             soup = BS(resp.content, 'html.parser')
