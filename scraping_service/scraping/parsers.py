@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup as BS
 
 
 __all__ = ('work', 'rabota', 'dou', 'djinni', 'msk_rabotaru', 'spb_rabotaru')
-
+'''
 headers = [
     {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36'},
@@ -22,7 +22,7 @@ headers = [
     {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.19582'}
 ]
-
+'''
 
 def work(url, city=None, language=None):
     jobs = []
