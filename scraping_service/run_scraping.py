@@ -24,7 +24,9 @@ parsers = (
     (dou, 'dou'),
     (rabota, 'rabota'),
     (djinni, 'djinni'),
-    (msk_hh, 'msk_hh'),
+    (hh, 'hh'),
+    # (msk_rabotaru, 'msk_rabotaru'),
+    # (spb_rabotaru, 'spb_rabotaru')
 )
 
 jobs, errors = [], []
@@ -85,5 +87,5 @@ if errors:
     else:
         er = Errors(data=f'error: {errors}').save()
 
-ten_days_ago = dt.date.today() - dt.timedelta(10)
+ten_days_ago = dt.date.today() - dt.timedelta(3)
 Vacancy.objects.filter(timestamp__lte=ten_days_ago).delete()
