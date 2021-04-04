@@ -6,7 +6,7 @@ from random import randint
 
 from bs4 import BeautifulSoup as BS
 
-__all__ = ('work', 'rabota', 'dou', 'djinni', 'msk_rabotaru', 'spb_rabotaru', 'msk_hh')
+__all__ = ('work', 'rabota', 'dou', 'djinni', 'msk_hh')
 
 headers = [
     {
@@ -147,7 +147,7 @@ def djinni(url, city=None, language=None):
             errors.append({'url': url, 'title': 'Page not found'})
     return jobs, errors
 
-
+'''
 def msk_rabotaru(url, city=None, language=None):
     jobs = []
     errors = []
@@ -208,12 +208,11 @@ def spb_rabotaru(url, city=None, language=None):
         else:
             errors.append({'url': url, 'title': 'Page not found'})
     return jobs, errors
-
+'''
 
 def msk_hh(url, city=None, language=None):
     jobs = []
     errors = []
-    domain = 'https://hh.ru/'
     if url:
         session = requests.Session()
         resp = session.get(url, headers=headers[randint(0, 5)])
