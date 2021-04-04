@@ -1,12 +1,12 @@
 """Парсер для сайтов"""
+import codecs
 
 import requests
 from random import randint
 
 from bs4 import BeautifulSoup as BS
 
-
-__all__ = ('work', 'rabota', 'dou', 'djinni', 'msk_rabotaru', 'spb_rabotaru')
+__all__ = ('work', 'rabota', 'dou', 'djinni', 'msk_rabotaru', 'spb_rabotaru', 'msk_hh')
 
 headers = [
     {
@@ -208,3 +208,40 @@ def spb_rabotaru(url, city=None, language=None):
         else:
             errors.append({'url': url, 'title': 'Page not found'})
     return jobs, errors
+
+
+def msk_hh(url, city=None, language=None):
+    jobs = []
+    errors = []
+    domain = 'https://hh.ru/'
+    if url:
+        session = requests.Session()
+        resp = session.get(url, headers=headers[randint(0, 5)])
+        if resp.status_code == 200:
+            soup = BS(resp.content, 'html.parser')
+            main_div = soup.find_all('div', attrs={'data-qa': 'vacancy-serp__vacancy'})
+            for div in main_div:
+                title = div.find('a', attrs={'data-qa': 'vacancy-serp__vacancy-title'}).text
+                href = div.find('a', attrs={'data-qa': 'vacancy-serp__vacancy-title'})['href']
+                div_content_responsibility = div.find('div',
+                                                      attrs={'data-qa': 'vacancy-serp__vacancy_snippet_responsibility'})
+                div_content_requirement = div.find('div',
+                                                   attrs={'data-qa': 'vacancy-serp__vacancy_snippet_requirement'})
+                content = div_content_responsibility.text + div_content_requirement.text
+                company = 'No name'
+                div_company = div.find('div', attrs={'class': 'vacancy-serp-item__meta-info-company'})
+                if div_company:
+                    company = div_company.text
+                jobs.append(
+                    {'title': title, 'url': domain + href, 'description': content, 'company': company, 'city_id': city,
+                     'language_id': language})
+        else:
+            errors.append({'url': url, 'title': 'Page not found'})
+    return jobs, errors
+
+
+'''if __name__ == '__main__':
+    url = 'https://hh.ru/search/vacancy?area=1&fromSearchLine=true&st=searchVacancy&text=python'
+    jobs, errors = msk_hh(url)
+    with codecs.open('work.txt', 'w', 'utf-8') as h:
+        h.write(str(jobs))'''

@@ -1,4 +1,5 @@
 from django.db import models
+import jsonfield
 
 
 class City(models.Model):
@@ -56,7 +57,7 @@ class Errors(models.Model):
 
 
 def default_urls():
-    return {'work': '', 'rabota': '', 'dou': '', 'djinni': '', 'msk_rabotaru': '', 'spb_rabotaru': ''}
+    return {'work': '', 'rabota': '', 'dou': '', 'djinni': '', 'msk_rabotaru': '', 'spb_rabotaru': '', 'msk_hh': ''}
 
 
 class Url(models.Model):

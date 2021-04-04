@@ -26,6 +26,7 @@ parsers = (
     (djinni, 'djinni'),
     (msk_rabotaru, 'msk_rabotaru'),
     (spb_rabotaru, 'spb_rabotaru'),
+    (msk_hh, 'msk_hh'),
 )
 
 jobs, errors = [], []
