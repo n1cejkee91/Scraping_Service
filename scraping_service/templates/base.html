@@ -86,26 +86,22 @@
 
 <script>
 $(document).ready(function(){
-    $('body').append('<button class="btn btn-outline-secondary" onclick="topFunction()" id="go-top" title="Перейти к началу страницы">Вверх</button>');
+    $('body').append('<a href="#" id="scroll_top" title="Наверх"></a>');
 });
 
-$(function() {
-    $.fn.scrollToTop = function() {
-        $(this).hide().removeAttr("href");
-            if ($(window).scrollTop() >= "250") $(this).fadeIn("slow")
-            var scrollDiv = $(this);
-        $(window).scroll(function() {
-            if ($(window).scrollTop() <= "250") $(scrollDiv).fadeOut("slow")
-            else $(scrollDiv).fadeIn("slow")
-        });
-    $(this).click(function() {
-        $("html, body").animate({scrollTop: 0}, "slow")
-    })
-    }
-});
+$(function(){
+	$(window).scroll(function(){
+		if($(window).scrollTop() > 100) {
+			$('#scroll_top').show();
+		} else {
+			$('#scroll_top').hide();
+		}
+	});
 
-$(function() {
-    $("#go-top").scrollToTop();
+	$('#scroll_top').click(function(){
+		$('html, body').animate({scrollTop: 0}, 600);
+		return false;
+	});
 });
 
 
