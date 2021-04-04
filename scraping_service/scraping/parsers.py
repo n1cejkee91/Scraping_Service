@@ -233,15 +233,8 @@ def msk_hh(url, city=None, language=None):
                 if div_company:
                     company = div_company.text
                 jobs.append(
-                    {'title': title, 'url': domain + href, 'description': content, 'company': company, 'city_id': city,
+                    {'title': title, 'url': href, 'description': content, 'company': company, 'city_id': city,
                      'language_id': language})
         else:
             errors.append({'url': url, 'title': 'Page not found'})
     return jobs, errors
-
-
-'''if __name__ == '__main__':
-    url = 'https://hh.ru/search/vacancy?area=1&fromSearchLine=true&st=searchVacancy&text=python'
-    jobs, errors = msk_hh(url)
-    with codecs.open('work.txt', 'w', 'utf-8') as h:
-        h.write(str(jobs))'''
