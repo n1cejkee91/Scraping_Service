@@ -6,3 +6,17 @@
     font-family: WendyOne;
     color: #44B;
 }
+#go-top {
+  position: fixed;
+  bottom: 100px;
+  right: 100px;
+  cursor:pointer;
+  display:none;
+  width: 70px;
+  height: 40px;
+
+}
+
+#go-top:hover {
+  background: #333;
+}

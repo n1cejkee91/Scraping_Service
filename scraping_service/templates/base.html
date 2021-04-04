@@ -5,7 +5,6 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <link rel="icon" href="{% static 'images/my_favicon.ico' %}">
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <!-- Bootstrap CSS -->
@@ -13,6 +12,8 @@
           integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
     <title>{% block title %}{% endblock %}</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="/js/go_top.js"></script>
 
 </head>
 <body>
@@ -48,6 +49,7 @@
         </div>
     </nav>
 </div>
+
 <div class="container">
     <div class="row">
         <div class="col-8 mx-auto my-3">
@@ -82,6 +84,32 @@
         integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
         crossorigin="anonymous"></script>
 
+<script>
+$(document).ready(function(){
+    $('body').append('<button class="btn btn-outline-secondary" onclick="topFunction()" id="go-top" title="Перейти к началу страницы">Вверх</button>');
+});
+
+$(function() {
+    $.fn.scrollToTop = function() {
+        $(this).hide().removeAttr("href");
+            if ($(window).scrollTop() >= "250") $(this).fadeIn("slow")
+            var scrollDiv = $(this);
+        $(window).scroll(function() {
+            if ($(window).scrollTop() <= "250") $(scrollDiv).fadeOut("slow")
+            else $(scrollDiv).fadeIn("slow")
+        });
+    $(this).click(function() {
+        $("html, body").animate({scrollTop: 0}, "slow")
+    })
+    }
+});
+
+$(function() {
+    $("#go-top").scrollToTop();
+});
+
+
+</script>
 <!-- Option 2: Separate Popper and Bootstrap JS -->
 <!--
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
